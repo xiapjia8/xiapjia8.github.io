@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   </head>
   <body>
     <script src="static/js/html2canvas.js"></script>
@@ -15,10 +16,10 @@
           src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMuMiIvPgogICAgPHBhdGggZD0iTTkgMkw3LjE3IDRINGMtMS4xIDAtMiAuOS0yIDJ2MTJjMCAxLjEuOSAyIDIgMmgxNmMxLjEgMCAyLS45IDItMlY2YzAtMS4xLS45LTItMi0yaC0zLjE3TDE1IDJIOXptMyAxNWMtMi43NiAwLTUtMi4yNC01LTVzMi4yNC01IDUtNSA1IDIuMjQgNSA1LTIuMjQgNS01IDV6Ii8+CiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+Cjwvc3ZnPgo="
           alt="Try html2canvas"
           class="css-1bgbwga"
-          onclick="share()"
+          onclick="takephotos()"
         />
       </div>
-      <div class="page" id="page" >
+      <div class="page" id="page">
         <img
           src="./static/image/188.jpg"
           alt=""
@@ -29,9 +30,7 @@
         <span contenteditable="plaintext-only" class="jihuo2"
           >首次享受五折</span
         >
-        <span contenteditable="true" class="text1">
-          1、此卡不能兑换现金
-        </span>
+        <span contenteditable="true" class="text1"> 1、此卡不能兑换现金 </span>
         <span contenteditable="true" class="text2">
           2、凭此卡联系接单员即可享受隔日预定
         </span>
@@ -43,39 +42,25 @@
         </span>
       </div>
     </div>
-    <script
-      type="text/javascript"
-      src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-    ></script>
     <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
-      function share() {
-        console.log(1111111);
-        var y =
-          window.pageYOffset ||
-          document.documentElement.scrollTop ||
-          document.body.scrollTop ||
-          0;
-        $("body").css({
-          position: "fixed",
-          top: `-${y}px`,
+      function takephotos() {
+        // 获取你想截屏的大盒子  获取那个盒子的DOM  就截取那个盒子  我这里截取的是body  当前视口
+        let save2 = document.body;
+        html2canvas(save2).then((canvas) => {
+          let url = canvas.toDataURL("image/png");
+          let aLink = document.createElement("a");
+          aLink.style.display = "none";
+          aLink.href = url;
+          // console.log(aLink.href);
+          // router.push({name: 'menu', query: {'src': aLink.href}})
+          // aLink.download = "截图.png";
+          // document.body.appendChild(aLink);
+          // aLink.click();
+          // document.body.removeChild(aLink);
+          window.localStorage.setItem("src", aLink.href);
+          router.push({ name: "menu" });
         });
-        setTimeout(function () {
-          var targetDom = document.getElementById("page");
-          html2canvas(targetDom, {
-            useCORS: true, // 开启跨域配置
-            height: targetDom.scrollHeight, //canvas高
-            width: targetDom.scrollWidth, //canvas宽
-            allowTaint:false
-          }).then((canvas) => {
-            console.log();
-            let url = canvas.toDataURL("image/jpeg", 1.0);
-            $("body").css({
-              position: "static",
-            });
-            window.scrollTo(0, y);
-          });
-        }, 100);
       }
     </script>
   </body>
