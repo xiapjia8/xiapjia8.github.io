@@ -46,7 +46,7 @@
     <script>
       function takephotos() {
         // 获取你想截屏的大盒子  获取那个盒子的DOM  就截取那个盒子  我这里截取的是body  当前视口
-        let save2 = document.body;
+        let save2 = document.getElementById('page');
         html2canvas(save2).then((canvas) => {
           let url = canvas.toDataURL("image/png");
           let aLink = document.createElement("a");
