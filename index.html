@@ -52,14 +52,14 @@
           let aLink = document.createElement("a");
           aLink.style.display = "none";
           aLink.href = url;
-          // console.log(aLink.href);
-          // router.push({name: 'menu', query: {'src': aLink.href}})
-          // aLink.download = "截图.png";
-          // document.body.appendChild(aLink);
-          // aLink.click();
-          // document.body.removeChild(aLink);
+          console.log(aLink.href);
+        //   router.push({name: 'menu', query: {'src': aLink.href}})
+          aLink.download = "截图.png";
+          document.body.appendChild(aLink);
+          aLink.click();
+          document.body.removeChild(aLink);
           window.localStorage.setItem("src", aLink.href);
-          router.push({ name: "menu" });
+        //   router.push({ name: "menu" });
         });
       }
     </script>
